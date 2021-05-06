@@ -7,6 +7,7 @@
  */
 
 import React, {useEffect, useRef} from 'react';
+import firebase from '@react-native-firebase/app';
 import analytics from '@react-native-firebase/analytics';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
@@ -26,28 +27,43 @@ import {TabNav} from './navigators/TabNav';
 
 const Stack = createStackNavigator();
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loaded: false,
-    };
+export function getActiveRouteName(state: any): any {
+  const route = state.routes[state.index];
+
+  // resolve nested navigators recursivly
+  if (route.state) {
+    return getActiveRouteName(route.state);
   }
 
-  render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator initialRouteName="TabNav">
-          <Stack.Screen
-            name="TabNav"
-            component={TabNav}
-            options={{headerShown: false}}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+  return route.name;
 }
+
+const App = () => {
+  const routeNameRef = useRef();
+  return (
+    <NavigationContainer
+      onStateChange={state => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = getActiveRouteName(state);
+        if (previousRouteName !== currentRouteName) {
+          analytics().logScreenView({
+            screen_name: currentRouteName,
+            screen_class: currentRouteName,
+          });
+        }
+      }}>
+      <Stack.Navigator initialRouteName="TabNav">
+        <Stack.Screen
+          name="TabNav"
+          component={TabNav}
+          options={{headerShown: false}}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   button: {
