@@ -59,7 +59,7 @@ const LoginScreen = props => {
 
           <TouchableOpacity
             style={styles.LoginScreen.touchableStyle}
-            onPress={() => props.navigation.navigate('Sign')}>
+            onPress={() => props.navigation.navigate('Register')}>
             <Text>Sign Up</Text>
           </TouchableOpacity>
         </View>

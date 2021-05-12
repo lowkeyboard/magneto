@@ -1,7 +1,16 @@
 import React from 'react';
-import {View, Text, Image, ScrollView, TextInput, Button} from 'react-native';
+import {
+  View,
+  Text,
+  Image,
+  ScrollView,
+  TextInput,
+  Button,
+  TouchableOpacity,
+} from 'react-native';
 import analytics from '@react-native-firebase/analytics';
-export const HomeScreen = () => {
+
+export const HomeScreen = props => {
   return (
     <ScrollView>
       <Text>HomeScreen</Text>
@@ -37,6 +46,9 @@ export const HomeScreen = () => {
           })
         }
       />
+      <TouchableOpacity onPress={() => props.navigation.navigate('Profile')}>
+        <Text>go to profile screen.</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };

@@ -13,7 +13,7 @@ export function getActiveRouteName(state: any): any {
 
   return route.name;
 }
-export default function App() {
+export default function App({navigation}) {
   const routeNameRef = useRef(null);
   return (
     <NavigationContainer

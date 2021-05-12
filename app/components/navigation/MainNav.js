@@ -22,7 +22,7 @@ export function SplashScreen() {
   );
 }
 
-export default function MainNav() {
+export default function MainNav({navigation}) {
   // Set an initializing state whilst Firebase connects
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();

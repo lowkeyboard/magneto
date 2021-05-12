@@ -1,27 +1,16 @@
 import React from 'react';
-import {View, Text, Image, ScrollView, TextInput} from 'react-native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+import {Screen1} from '../tabs/Screen1';
+import {Screen2} from '../tabs/Screen2';
+
+const Tab = createBottomTabNavigator();
 
 export const ProfileScreen = () => {
   return (
-    <ScrollView>
-      <Text>PRofile</Text>
-      <View>
-        <Text>Some more text</Text>
-        <Image
-          source={{
-            uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
-          }}
-          style={{width: 200, height: 200}}
-        />
-      </View>
-      <TextInput
-        style={{
-          height: 40,
-          borderColor: 'gray',
-          borderWidth: 1,
-        }}
-        defaultValue="You can type in me"
-      />
-    </ScrollView>
+    <Tab.Navigator>
+      <Tab.Screen name="Screen1" component={Screen1} />
+      <Tab.Screen name="Screen2" component={Screen2} />
+    </Tab.Navigator>
   );
 };
