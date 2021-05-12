@@ -1,6 +1,6 @@
 import React from 'react';
-import {View, Text, Image, ScrollView, TextInput} from 'react-native';
-
+import {View, Text, Image, ScrollView, TextInput, Button} from 'react-native';
+import analytics from '@react-native-firebase/analytics';
 export const HomeScreen = () => {
   return (
     <ScrollView>
@@ -21,6 +21,21 @@ export const HomeScreen = () => {
           borderWidth: 1,
         }}
         defaultValue="You can type in me"
+      />
+      <Button
+        title="Click to Make an Event"
+        onPress={async () => await analytics().logEvent('12mayisEvent')}
+      />
+      <Button
+        title="Press me"
+        // Logs in the firebase analytics console as "select_content" event
+        // only accepts the two object properties which accept strings.
+        onPress={async () =>
+          await analytics().logSelectContent({
+            content_type: 'clothing',
+            item_id: 'abcd',
+          })
+        }
       />
     </ScrollView>
   );
