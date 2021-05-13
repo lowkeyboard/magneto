@@ -49,6 +49,10 @@ export const HomeScreen = props => {
       <TouchableOpacity onPress={() => props.navigation.navigate('Profile')}>
         <Text>go to profile screen.</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => props.navigation.navigate('did_it_crash_screen')}>
+        <Text>click to test crashlytics here.</Text>
+      </TouchableOpacity>
     </ScrollView>
   );
 };

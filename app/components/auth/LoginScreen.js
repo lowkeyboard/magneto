@@ -22,7 +22,7 @@ const LoginScreen = props => {
     try {
       await auth().signInWithEmailAndPassword(email, password);
 
-      AsyncStorage.setItem('@USER_ID', auth().currentUser.uid);
+      AsyncStorage.setItem('@USER_ID', auth().currentUser.uid); //user's unique ID.
       Alert.alert('Welcome! Login Succesful.');
     } catch (error) {
       console.log(error);
